@@ -2,10 +2,10 @@ require_relative 'node'
 
 class Bst
 
-  attr_reader :root
+  attr_accessor :root
 
   def initialize(keys, array_is_sorted=false)
-    array_is_sorted ? build_balanced_tree(keys, 0, (keys.count-1)) : build_tree(keys)
+    array_is_sorted ? @root = build_balanced_tree(keys, 0, (keys.count-1)) : build_tree(keys)
   end
 
   def build_balanced_tree(keys, start_idx, end_idx)
@@ -17,8 +17,8 @@ class Bst
 
     root = Node.new(keys[mid])
 
-    root.left = build_tree(keys, start_idx, mid-1)
-    root.right = build_tree(keys, mid+1, end_idx)
+    root.left = build_balanced_tree(keys, start_idx, mid-1)
+    root.right = build_balanced_tree(keys, mid+1, end_idx)
 
     return root
   end
@@ -30,7 +30,6 @@ class Bst
       #puts "Build tree is putting key #{key}"
       put(key)
     end
-
   end
 
   def put(key, node=@root)
@@ -56,4 +55,9 @@ end
 
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 tree = Bst.new(arr, true)
-tree.to_s
+puts tree.to_s
+
+puts "Taking a breather\n\n"
+
+arr2 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+tree2 = Bst.new(arr2)
