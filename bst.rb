@@ -1,36 +1,6 @@
+require_relative 'node'
+
 class Bst
-
-  class Node
-    attr_accessor :left, :right, :key, :value, :n
-
-    def initialize(key, n=0)
-      @n = n
-      @key = key
-    end
-
-    def to_s
-      "Left: #{left.key}\nKey: #{self.key}\nRight: #{right.key}"
-    end
-
-    def child_right?
-      return self.right
-    end
-
-    def child_left?
-      return self.left
-    end
-
-    def add_child_left(value)
-      puts "Theroetically, we're adding #{value} to the left of #{self.key}"
-      self.left = Node.new(value)
-    end
-
-    def add_child_right(value)
-      puts "Theoretically, we're adding #{value} to the right of #{self.key}"
-      self.right = Node.new(value)
-    end
-
-  end
 
   attr_reader :root
 
@@ -54,38 +24,36 @@ class Bst
   end
 
   def build_tree(keys)
-
-
     @root = Node.new(keys.first)
-    puts "The root of the tree is #{@root.key} from #{keys.first}"
+    #puts "The root of the tree is #{@root.key} from #{keys.first}"
     keys[1..-1].each do |key|
-      puts "Build tree is putting key #{key}"
+      #puts "Build tree is putting key #{key}"
       put(key)
     end
 
   end
 
   def put(key, node=@root)
-    puts "Inside put, key #{key} is being added to node #{node.key}"
+    #puts "Inside put, key #{key} is being added to node #{node.key}"
     if key < node.key
-      puts "Put has decided that #{key} is less than #{node.key}"
+      #puts "Put has decided that #{key} is less than #{node.key}"
       node.child_left? ? put(key, node.left) : node.add_child_left(key)
     elsif key > node.key
-      puts "Put has decided that #{key} is greater than #{node.key}"
+      #puts "Put has decided that #{key} is greater than #{node.key}"
       node.child_right? ? put(key, node.right) : node.add_child_right(key)
     else
-      puts "Put has decided that the two keys are the same."
+      #puts "Put has decided that the two keys are the same."
       node.key = key
     end
   end
 
   def to_s
-    #puts @root
+    @root.to_s
   end
 
 end
 
 
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-tree = Bst.new(arr)
+tree = Bst.new(arr, true)
 tree.to_s
