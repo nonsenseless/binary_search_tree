@@ -64,3 +64,16 @@ tree2 = Bst.new(arr2)
 
 c = Crawler.new(tree2)
 puts c.bfs(6345)
+puts c.bfs(8)
+
+puts c.dfs(6345)
+puts c.dfs(8)
+
+c = Crawler.new(tree2)
+
+c.dfs_rec(67)
+
+c = Crawler.new(tree2)
+
+
+c.dfs_rec(324)
