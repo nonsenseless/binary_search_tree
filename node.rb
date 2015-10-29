@@ -7,7 +7,7 @@ class Node
   end
 
   def to_s
-    puts "\n\t\tKey: #{self.key}\nLeft: #{self.left.key if self.left}\t\t\t\tRight: #{self.right.key if self.right}"
+    "Key: #{self.key} \t Left: #{self.left.key if self.left} \t Right: #{self.right.key if self.right}"
   end
 
   def child_right?

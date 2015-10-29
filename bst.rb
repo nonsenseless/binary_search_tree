@@ -1,4 +1,5 @@
 require_relative 'node'
+require_relative 'crawler'
 
 class Bst
 
@@ -6,6 +7,7 @@ class Bst
 
   def initialize(keys, array_is_sorted=false)
     array_is_sorted ? @root = build_balanced_tree(keys, 0, (keys.count-1)) : build_tree(keys)
+    puts "Binary Search Tree Prepped!"
   end
 
   def build_balanced_tree(keys, start_idx, end_idx)
@@ -50,14 +52,15 @@ class Bst
     @root.to_s
   end
 
+
 end
 
 
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 tree = Bst.new(arr, true)
-puts tree.to_s
-
-puts "Taking a breather\n\n"
 
 arr2 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 tree2 = Bst.new(arr2)
+
+c = Crawler.new(tree2)
+puts c.bfs(6345)
